@@ -4,7 +4,7 @@ import { doc, getDoc, getDocFromServer } from 'firebase/firestore';
 import { auth, db, logout } from './lib/firebase';
 import { translations, Language } from './lib/i18n';
 import { 
-  BrowserRouter,
+  HashRouter as Router,
   Routes,
   Route,
   Navigate,
@@ -340,9 +340,9 @@ function AppContent() {
 
 export default function App() {
   return (
-    <BrowserRouter>
+    <Router>
       <AppContent />
-    </BrowserRouter>
+    </Router>
   );
 }
 
