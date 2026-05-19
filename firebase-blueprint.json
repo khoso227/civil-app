@@ -1,0 +1,132 @@
+{
+  "entities": {
+    "Project": {
+      "title": "Project",
+      "description": "A construction project tracking record.",
+      "type": "object",
+      "properties": {
+        "name": { "type": "string" },
+        "location": { "type": "string" },
+        "status": { "type": "string", "enum": ["Planning", "In Progress", "Completed", "On Hold"] },
+        "budget": { "type": "number" },
+        "ownerId": { "type": "string" },
+        "startDate": { "type": "string", "format": "date-time" },
+        "createdAt": { "type": "string", "format": "date-time" }
+      },
+      "required": ["name", "status", "ownerId"]
+    },
+    "Task": {
+      "title": "Task",
+      "description": "A task within a project.",
+      "type": "object",
+      "properties": {
+        "projectId": { "type": "string" },
+        "title": { "type": "string" },
+        "description": { "type": "string" },
+        "status": { "type": "string", "enum": ["Todo", "In Progress", "Done"] },
+        "assigneeName": { "type": "string" },
+        "priority": { "type": "string", "enum": ["Low", "Medium", "High"] },
+        "dueDate": { "type": "string", "format": "date-time" }
+      },
+      "required": ["projectId", "title", "status"]
+    },
+    "InventoryItem": {
+      "title": "Inventory Item",
+      "description": "Material or equipment in inventory.",
+      "type": "object",
+      "properties": {
+        "projectId": { "type": "string" },
+        "name": { "type": "string" },
+        "quantity": { "type": "number" },
+        "unit": { "type": "string" },
+        "unitCost": { "type": "number" }
+      },
+      "required": ["projectId", "name", "quantity", "unit"]
+    },
+    "SitePhoto": {
+      "title": "Site Photo",
+      "description": "Photo taken on site with AI analysis.",
+      "type": "object",
+      "properties": {
+        "projectId": { "type": "string" },
+        "url": { "type": "string" },
+        "analysis": { "type": "string" },
+        "timestamp": { "type": "string", "format": "date-time" },
+        "userId": { "type": "string" }
+      },
+      "required": ["projectId", "url", "userId"]
+    },
+    "UserProfile": {
+      "title": "User Profile",
+      "description": "User roles and profile information.",
+      "type": "object",
+      "properties": {
+        "roles": { "type": "array", "items": { "type": "string", "enum": ["Admin", "Engineer", "Surveyor", "Supervisor"] } },
+        "language": { "type": "string", "enum": ["en", "ur", "sd"] },
+        "email": { "type": "string" },
+        "displayName": { "type": "string" },
+        "phoneNumber": { "type": "string" },
+        "recoveryEmail": { "type": "string" },
+        "updatedAt": { "type": "string", "format": "date-time" }
+      },
+      "required": ["roles", "email", "language"]
+    },
+    "Message": {
+      "title": "Team Message",
+      "description": "A message in the team chat.",
+      "type": "object",
+      "properties": {
+        "text": { "type": "string" },
+        "userId": { "type": "string" },
+        "userName": { "type": "string" },
+        "userRole": { "type": "string" },
+        "createdAt": { "type": "string", "format": "date-time" }
+      },
+      "required": ["text", "userId", "userName"]
+    },
+    "Equipment": {
+      "title": "Equipment",
+      "description": "Construction machinery or heavy tool",
+      "type": "object",
+      "properties": {
+        "name": { "type": "string" },
+        "type": { "type": "string" },
+        "status": { "type": "string", "enum": ["Active", "Maintenance", "Idle", "Offline"] },
+        "operator": { "type": "string" },
+        "lastService": { "type": "string", "format": "date-time" },
+        "healthScore": { "type": "number" },
+        "location": { "type": "string" }
+      }
+    }
+  },
+  "firestore": {
+    "/users/{userId}": {
+      "schema": "UserProfile",
+      "description": "User profiles and roles."
+    },
+    "/projects/{projectId}": {
+      "schema": "Project",
+      "description": "Main projects collection."
+    },
+    "/projects/{projectId}/tasks/{taskId}": {
+      "schema": "Task",
+      "description": "Tasks associated with a project."
+    },
+    "/projects/{projectId}/inventory/{itemId}": {
+      "schema": "InventoryItem",
+      "description": "Inventory items for a project."
+    },
+    "/sitePhotos/{photoId}": {
+      "schema": "SitePhoto",
+      "description": "Photos with AI analysis (top-level collection)."
+    },
+    "/team_messages/{messageId}": {
+      "schema": "Message",
+      "description": "Team collaboration messages."
+    },
+    "/equipment/{equipmentId}": {
+      "schema": "Equipment",
+      "description": "On-site machinery and tools tracking."
+    }
+  }
+}

@@ -1,0 +1,7 @@
+<?xml version='1.0' encoding='utf-8'?>
+<resources>
+    <string name="app_name">Civil-OS</string>
+    <string name="title_activity_main">Civil-OS</string>
+    <string name="package_name">com.civilos.app</string>
+    <string name="custom_url_scheme">com.civilos.app</string>
+</resources>

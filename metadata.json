@@ -1,0 +1,14 @@
+{
+  "name": "Civil-OS",
+  "description": "Intelligent Construction Operating System for digital site management, AI material estimation, and project tracking.",
+  "requestFramePermissions": [
+    "camera",
+    "microphone",
+    "geolocation"
+  ],
+  "majorCapabilities": [
+    "AI-powered engineering calculations",
+    "Real-time project tracking",
+    "Inventory & Cost Control"
+  ]
+}
